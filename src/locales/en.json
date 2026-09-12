@@ -1,0 +1,26 @@
+{
+  "Common": {
+    "brandName": "Nieto Green Care",
+    "tagline": "Professional lawn care in the Austin, TX area",
+    "getQuote": "Get a quote",
+    "call": "Call now",
+    "email": "Email us",
+    "phoneDisplay": "(737) 314-4215",
+    "rightsReserved": "All rights reserved"
+  },
+  "Home": {
+    "badge": "Local service · Austin, TX",
+    "heroTitle": "Flawless lawn, zero hassle",
+    "heroSubtitle": "Get your quote in seconds: measure your lawn with the satellite map or pick a size range. Serving Hutto, Round Rock, Georgetown, Leander, Cedar Park, Liberty Hill, and Jarrell.",
+    "heroCta": "Get my quote",
+    "servicesTitle": "What our service includes",
+    "services": {
+      "mowing": "Lawn mowing and garden maintenance",
+      "trimming": "Shrub trimming and edge care",
+      "hauling": "Mulch or green waste removal (Bag & Haul)"
+    },
+    "coverageTitle": "Coverage areas",
+    "ctaSectionTitle": "Ready for a flawless lawn?",
+    "ctaSectionDesc": "Answer 3 questions and get your quote instantly, no commitment."
+  }
+}

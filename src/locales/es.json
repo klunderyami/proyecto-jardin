@@ -1,0 +1,26 @@
+{
+  "Common": {
+    "brandName": "Nieto Green Care",
+    "tagline": "Cuidado profesional de jardines en el área de Austin, TX",
+    "getQuote": "Cotizar ahora",
+    "call": "Llamar ahora",
+    "email": "Escríbenos",
+    "phoneDisplay": "(737) 314-4215",
+    "rightsReserved": "Todos los derechos reservados"
+  },
+  "Home": {
+    "badge": "Servicio local · Austin, TX",
+    "heroTitle": "Jardín impecable, sin complicaciones",
+    "heroSubtitle": "Cotización en segundos: calcula el área de tu jardín con el mapa satelital o elige un rango de tamaño. Servicio en Hutto, Round Rock, Georgetown, Leander, Cedar Park, Liberty Hill y Jarrell.",
+    "heroCta": "Cotizar en segundos",
+    "servicesTitle": "Qué incluye nuestro servicio",
+    "services": {
+      "mowing": "Corte de césped y mantenimiento del jardín",
+      "trimming": "Poda de arbustos y mantenimiento de bordes",
+      "hauling": "Mulch o retiro de residuos vegetales (Bag & Haul)"
+    },
+    "coverageTitle": "Áreas de cobertura",
+    "ctaSectionTitle": "¿Listo para un jardín impecable?",
+    "ctaSectionDesc": "Responde 3 preguntas y recibe tu cotización de inmediato y sin compromiso."
+  }
+}
