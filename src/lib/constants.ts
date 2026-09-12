@@ -1,3 +1,5 @@
+import type { LeadStatus, ServiceFreq, WasteTreatment } from "@/types/database";
+
 /**
  * Datos públicos del negocio.
  * Fuente única de contacto: el cliente NO edita código;
@@ -18,3 +20,22 @@ export function buildSmsLink(message = ""): string {
   if (!message) return base;
   return `${base}?body=${encodeURIComponent(message)}`;
 }
+
+// ---------- Etiquetas del Panel de Control (es) ----------
+
+export const LEAD_STATUS_LABELS: Record<LeadStatus, string> = {
+  new: "Nuevo",
+  contacted: "Contactado",
+  closed: "Cerrado",
+};
+
+export const SERVICE_FREQ_LABELS: Record<ServiceFreq, string> = {
+  one_time: "Solo una vez",
+  weekly: "Semanal",
+  bi_weekly: "Cada dos semanas",
+};
+
+export const WASTE_TREATMENT_LABELS: Record<WasteTreatment, string> = {
+  mulch: "Mulch",
+  bag_haul: "Bag & Haul",
+};

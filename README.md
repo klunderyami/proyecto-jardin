@@ -66,10 +66,21 @@ su contenido desde `/admin` sin tocar código.
 Ver [`.env.example`](.env.example). Las llaves residen en `.env.local`
 (nunca se sube; está en `.gitignore`).
 
+## Supabase (configuración inicial)
+
+1. Crea un proyecto gratuito en [supabase.com](https://supabase.com).
+2. Abre **SQL Editor → New query**, pega el contenido de
+   [`supabase/schema.sql`](supabase/schema.sql) y ejecútalo (tablas + RLS + seed).
+3. En **Project Settings → API** copia `URL` y `anon public key` a `.env.local`.
+4. En **Project Settings → API → Service Role** copia la `service_role secret`
+   (solo servidor) a `SUPABASE_SERVICE_ROLE_KEY`.
+5. En **Authentication → Users → Add user**, crea el usuario del cliente
+   (email/contraseña) para entrar al Panel de Control.
+
 ## Fases
 
-- [x] **Fase 1** — Repositorio, arquitectura, i18n raíz, clientes Supabase, esquema SQL.
-- [ ] **Fase 2** — Panel de Control (login, leads, tarifas, contenidos).
+- [x] **Fase 1** — Repositorio, arquitectura, i18n raíz, clientes Supabase.
+- [x] **Fase 2** — Panel de Control `/admin` (login, leads, tarifario, contenido) + schema.sql.
 - [ ] **Fase 3** — Cotizador satelital (mapa + rangos manuales).
 - [ ] **Fase 4** — Registro y notificación (SMS deep link + Resend + BD).
 - [ ] **Fase 5** — Pulido mobile-first, SEO y deploy (Vercel).

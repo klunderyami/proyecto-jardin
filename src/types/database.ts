@@ -1,7 +1,10 @@
 /**
- * Tipos de la base de datos Supabase (proyecto Nieto Green Care).
- * Espejo de supabase/migrations/0001_init.sql.
- * Se puede regenerar con `supabase gen types typescript`.
+ * Tipos de la base de datos Supabase (Nieto Green Care · Fase 2).
+ * Espejo de supabase/schema.sql.
+ *
+ * NOTA: Usamos `type` (no `interface`) para Row/Insert/Update porque
+ * TypeScript solo otorga índice implícito (Record<string, unknown>) a
+ * los object literal types, requisito del GenericTable de supabase-js.
  */
 
 export type Json =
@@ -12,211 +15,108 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[];
 
-export type Locale = "es" | "en";
-export type FrequencyKey = "one_time" | "weekly" | "bi_weekly";
-export type WasteKey = "mulch" | "bag_haul";
-export type SqftSource = "map" | "manual";
-export type LeadStatus = "new" | "contacted" | "quoted" | "closed";
+export type LeadStatus = "new" | "contacted" | "closed";
+export type ServiceFreq = "one_time" | "weekly" | "bi_weekly";
+export type WasteTreatment = "mulch" | "bag_haul";
 
-// ---------- app_settings ----------
-export interface AppSetting {
-  id: string;
-  key: string;
-  value: Json;
-  updated_at: string | null;
-}
-export interface AppSettingInsert {
-  key: string;
-  value: Json;
-}
-export type AppSettingUpdate = Partial<AppSettingInsert>;
-
-// ---------- price_tiers ----------
-export interface PriceTier {
-  id: string;
-  min_sqft: number | null;
-  max_sqft: number | null;
-  price_per_sqft: number;
-  active: boolean;
-  sort: number | null;
-  updated_at: string | null;
-}
-export interface PriceTierInsert {
-  min_sqft?: number | null;
-  max_sqft?: number | null;
-  price_per_sqft: number;
-  active?: boolean;
-  sort?: number | null;
-}
-export type PriceTierUpdate = Partial<PriceTierInsert>;
-
-// ---------- frequency_options ----------
-export interface FrequencyOption {
-  id: string;
-  key: FrequencyKey;
-  label_es: string;
-  label_en: string;
-  multiplier: number;
-  active: boolean;
-  sort: number | null;
-}
-export interface FrequencyOptionInsert {
-  key: FrequencyKey;
-  label_es: string;
-  label_en: string;
-  multiplier: number;
-  active?: boolean;
-  sort?: number | null;
-}
-export type FrequencyOptionUpdate = Partial<FrequencyOptionInsert>;
-
-// ---------- waste_options ----------
-export interface WasteOption {
-  id: string;
-  key: WasteKey;
-  label_es: string;
-  label_en: string;
-  surcharge: number;
-  active: boolean;
-  sort: number | null;
-}
-export interface WasteOptionInsert {
-  key: WasteKey;
-  label_es: string;
-  label_en: string;
-  surcharge?: number;
-  active?: boolean;
-  sort?: number | null;
-}
-export type WasteOptionUpdate = Partial<WasteOptionInsert>;
-
-// ---------- coverage_cities ----------
-export interface CoverageCity {
-  id: string;
-  name: string;
-  label_es: string | null;
-  label_en: string | null;
-  active: boolean;
-  sort: number | null;
-}
-export interface CoverageCityInsert {
-  name: string;
-  label_es?: string | null;
-  label_en?: string | null;
-  active?: boolean;
-  sort?: number | null;
-}
-export type CoverageCityUpdate = Partial<CoverageCityInsert>;
-
-// ---------- gallery_items ----------
-export interface GalleryItem {
-  id: string;
-  url: string;
-  alt_es: string | null;
-  alt_en: string | null;
-  sort: number | null;
-  active: boolean;
-}
-export interface GalleryItemInsert {
-  url: string;
-  alt_es?: string | null;
-  alt_en?: string | null;
-  sort?: number | null;
-  active?: boolean;
-}
-export type GalleryItemUpdate = Partial<GalleryItemInsert>;
-
-// ---------- lead_quotes ----------
-export interface LeadQuote {
+// ---------- leads ----------
+export type Lead = {
   id: string;
   created_at: string;
-  locale: Locale;
-  first_name: string | null;
-  last_name: string | null;
+  client_name: string | null;
+  phone: string;
   email: string | null;
-  phone: string;
   address: string | null;
-  city: string | null;
-  lat: number | null;
-  lng: number | null;
-  sqft: number | null;
-  sqft_source: SqftSource | null;
-  manual_range: string | null;
-  frequency_key: FrequencyKey | null;
-  waste_key: WasteKey | null;
-  price_per_sqft: number | null;
-  total_price: number | null;
-  payment_method: string | null;
+  sq_ft: number | null;
+  price_estimated: number | null;
+  payment_pref: string | null;
+  service_freq: ServiceFreq | null;
+  waste_treatment: WasteTreatment | null;
   preferred_date: string | null;
-  preferred_time: string | null;
-  instructions: string | null;
-  status: LeadStatus;
   notes: string | null;
-}
-export interface LeadQuoteInsert {
-  locale: Locale;
+  status: LeadStatus;
+};
+
+export type LeadInsert = {
   phone: string;
-  first_name?: string | null;
-  last_name?: string | null;
+  client_name?: string | null;
   email?: string | null;
   address?: string | null;
-  city?: string | null;
-  lat?: number | null;
-  lng?: number | null;
-  sqft?: number | null;
-  sqft_source?: SqftSource | null;
-  manual_range?: string | null;
-  frequency_key?: FrequencyKey | null;
-  waste_key?: WasteKey | null;
-  price_per_sqft?: number | null;
-  total_price?: number | null;
-  payment_method?: string | null;
+  sq_ft?: number | null;
+  price_estimated?: number | null;
+  payment_pref?: string | null;
+  service_freq?: ServiceFreq | null;
+  waste_treatment?: WasteTreatment | null;
   preferred_date?: string | null;
-  preferred_time?: string | null;
-  instructions?: string | null;
-  status?: LeadStatus;
   notes?: string | null;
-}
-export type LeadQuoteUpdate = Partial<LeadQuoteInsert>;
+  status?: LeadStatus;
+};
+
+export type LeadUpdate = Partial<LeadInsert>;
+
+// ---------- pricing_config ----------
+export type PricingConfig = {
+  id: string;
+  base_rate_per_sqft: number;
+  min_price: number;
+  tier_1000: number;
+  tier_5000: number;
+  tier_10000: number;
+  mulch_extra: number;
+  bag_haul_extra: number;
+  updated_at: string | null;
+};
+
+export type PricingConfigInsert = Partial<Omit<PricingConfig, "id">>;
+
+export type PricingConfigUpdate = {
+  base_rate_per_sqft?: number;
+  min_price?: number;
+  tier_1000?: number;
+  tier_5000?: number;
+  tier_10000?: number;
+  mulch_extra?: number;
+  bag_haul_extra?: number;
+};
+
+// ---------- site_content ----------
+export type SiteContent = {
+  id: string;
+  key: string;
+  value_es: string;
+  value_en: string;
+  updated_at: string | null;
+};
+
+export type SiteContentInsert = {
+  key: string;
+  value_es: string;
+  value_en?: string;
+};
+
+export type SiteContentUpdate = Partial<Omit<SiteContentInsert, "key">>;
 
 // ---------- Database ----------
 export interface Database {
   public: {
     Tables: {
-      app_settings: {
-        Row: AppSetting;
-        Insert: AppSettingInsert;
-        Update: AppSettingUpdate;
+      leads: {
+        Row: Lead;
+        Insert: LeadInsert;
+        Update: LeadUpdate;
+        Relationships: [];
       };
-      price_tiers: {
-        Row: PriceTier;
-        Insert: PriceTierInsert;
-        Update: PriceTierUpdate;
+      pricing_config: {
+        Row: PricingConfig;
+        Insert: PricingConfigInsert;
+        Update: PricingConfigUpdate;
+        Relationships: [];
       };
-      frequency_options: {
-        Row: FrequencyOption;
-        Insert: FrequencyOptionInsert;
-        Update: FrequencyOptionUpdate;
-      };
-      waste_options: {
-        Row: WasteOption;
-        Insert: WasteOptionInsert;
-        Update: WasteOptionUpdate;
-      };
-      coverage_cities: {
-        Row: CoverageCity;
-        Insert: CoverageCityInsert;
-        Update: CoverageCityUpdate;
-      };
-      gallery_items: {
-        Row: GalleryItem;
-        Insert: GalleryItemInsert;
-        Update: GalleryItemUpdate;
-      };
-      lead_quotes: {
-        Row: LeadQuote;
-        Insert: LeadQuoteInsert;
-        Update: LeadQuoteUpdate;
+      site_content: {
+        Row: SiteContent;
+        Insert: SiteContentInsert;
+        Update: SiteContentUpdate;
+        Relationships: [];
       };
     };
     Views: Record<string, never>;
